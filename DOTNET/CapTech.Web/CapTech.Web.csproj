@@ -44,7 +44,11 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Social\AddThis\Style.cs" />
+    <Compile Include="Social\ShareThis\Enum.cs" />
     <Compile Include="UI\WebControls\AddThis.cs" />
+    <Compile Include="UI\WebControls\ShareThis.cs" />
+    <Compile Include="UI\WebControls\ShareThisButton.cs" />
+    <Compile Include="UI\WebControls\ShareThisButtons.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
