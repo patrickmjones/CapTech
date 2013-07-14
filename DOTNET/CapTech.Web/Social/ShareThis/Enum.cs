@@ -13,11 +13,21 @@ namespace CapTech.Web.Social.ShareThis
 
 	public enum ShareThisButtonService
 	{
+		Digg,
 		Email,
 		Facebook,
 		FBLike,
+		Google,
+		GooglePlus,
 		LinkedIn,
 		Pinterest,
-		Twitter
+		PinterestFollow,
+		PlusOne, // Google +1
+		Reddit,
+		ShareThis,
+		Tumblr,
+		Twitter,
+		Yammer,
+		Youtube
 	}
 }

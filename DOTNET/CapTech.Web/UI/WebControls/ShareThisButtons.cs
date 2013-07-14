@@ -22,6 +22,26 @@ namespace CapTech.Web.UI.WebControls
 			set { buttonSize = value; }
 		}
 
+		protected string shareThisTitle;
+		/// <summary>
+		/// Title of shared item
+		/// </summary>
+		public string ShareThisTitle
+		{
+			get { return shareThisTitle; }
+			set { shareThisTitle = value; }
+		}
+
+		protected string shareThisURL;
+		/// <summary>
+		/// URL of item to share
+		/// </summary>
+		public string ShareThisURL
+		{
+			get { return shareThisURL; }
+			set { shareThisURL = value; }
+		}
+
 		public override void RenderEndTag(System.Web.UI.HtmlTextWriter writer)
 		{
 			RenderScripts(writer);

@@ -39,10 +39,10 @@
 			</cap:ShareThisButtons>
 
 			<h4>Share This - Buttons (small)</h4>
-			<cap:ShareThisButtons  runat="server" Publisher="ur-7c6ccffe-357-c8d2-84a9-3a6f5f9c7846" CssClass="share-this-widget">
+			<cap:ShareThisButtons  runat="server" Publisher="ur-7c6ccffe-357-c8d2-84a9-3a6f5f9c7846" CssClass="share-this-widget" ShareThisURL="http://www.google.com">
 			  <cap:ShareThisButton runat="server" Service="Facebook" ButtonSize="Small" />
 			  <cap:ShareThisButton runat="server" Service="LinkedIn" ButtonSize="Small" />
-			  <cap:ShareThisButton runat="server" Service="Pinterest" ButtonSize="Small" />
+			  <cap:ShareThisButton runat="server" Service="Pinterest" ButtonSize="Small" ShareThisURL="http://www.bing.com" />
 			  <cap:ShareThisButton runat="server" Service="Twitter" ButtonSize="Small" />
 			  <cap:ShareThisButton runat="server" Service="Email" ButtonSize="Small" />
 			</cap:ShareThisButtons>

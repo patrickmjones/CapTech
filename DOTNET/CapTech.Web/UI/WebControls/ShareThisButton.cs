@@ -2,6 +2,7 @@
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using CapTech.Web.Social.ShareThis;
+using System.Web.UI.HtmlControls;
 
 namespace CapTech.Web.UI.WebControls
 {
@@ -59,15 +60,60 @@ namespace CapTech.Web.UI.WebControls
 			}
 		}
 
-		protected override void Render(System.Web.UI.HtmlTextWriter writer)
+		protected string shareThisTitle;
+		/// <summary>
+		/// Title of item to share
+		/// </summary>
+		public string ShareThisTitle
 		{
-			new Literal() { Text = this.ToString() }.RenderControl(writer);
+			get {
+				if (String.IsNullOrEmpty(shareThisTitle) && this.Parent is ShareThisButtons)
+				{
+					return ((ShareThisButtons)this.Parent).ShareThisTitle;
+				}
+				return shareThisTitle; 
+			}
+			set { shareThisTitle = value; }
 		}
 
-		public override string ToString()
+		protected string shareThisURL;
+		/// <summary>
+		/// URL of item to share
+		/// </summary>
+		public string ShareThisURL
+		{
+			get
+			{
+				if (String.IsNullOrEmpty(shareThisURL) && this.Parent is ShareThisButtons)
+				{
+					return ((ShareThisButtons)this.Parent).ShareThisURL;
+				}
+				return shareThisURL;
+			}
+			set { shareThisURL = value; }
+		}
+
+		protected override void Render(System.Web.UI.HtmlTextWriter writer)
+		{
+			GetButton().RenderControl(writer);
+		}
+
+		public HtmlGenericControl GetButton()
 		{
 			string size = ButtonSize == ShareThisButtonSize.Large ? "_large" : String.Empty;
-			return String.Format(@"<span class='st_{0}{1}' displayText='{2}'></span>", ServiceClass, size, DisplayText);
+			HtmlGenericControl bspan = new HtmlGenericControl("span");
+			bspan.Attributes["displayText"] = DisplayText;
+			bspan.Attributes["class"] = String.Format("st_{0}{1}", ServiceClass, size);
+			if (!String.IsNullOrEmpty(ShareThisTitle))
+			{
+				bspan.Attributes["st_title"] = ShareThisTitle;
+			}
+			if (!String.IsNullOrEmpty(ShareThisURL))
+			{
+				bspan.Attributes["st_url"] = ShareThisURL;
+			}
+
+			return bspan;
 		}
 	}
 }
