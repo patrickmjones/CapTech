@@ -1,3 +1,11 @@
+
+# Include Stitch Class
+require File.dirname(__FILE__) + '/app/controllers/Stitch.rb'
+stitch = Stitch.new(File.dirname(__FILE__))
+stitch.stitch_files()
+
+
+=begin
 stitchdir = 'stitch'
 pagedir = stitchdir + '/pages'
 outputdir = stitchdir + '/html'
@@ -39,5 +47,5 @@ Dir.foreach(pagedir) do |page|
 print "file complete\n"
   File.open(outputdir + "/" + page, 'w') {|f| f.write(newcontents)}
 end
-
+=end
 
