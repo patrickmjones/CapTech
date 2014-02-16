@@ -1,6 +1,7 @@
 
-# Include Stitch Class
-require File.dirname(__FILE__) + '/app/controllers/Stitch.rb'
+# Include Stitch App
+require File.dirname(__FILE__) + '/app/config/config.rb'
+require File.dirname(__FILE__) + '/app/app.rb'
 stitch = Stitch.new(File.dirname(__FILE__))
 stitch.stitch_files()
 
