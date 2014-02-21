@@ -4,15 +4,26 @@ class Lorem
 		@pointer = 0
 		@wordcount = 20
 		if !args.empty?
-			if args.length == 1
-				if(args[0].to_s == 'text')
-					lorem_text()
-				else 
-					lorem_single_tag(args[0])
+		
+			case args[0].to_s
+			when 'text'
+				lorem_text()
+			when 'img'
+				lorem_img(args[0], args[1], args[2])
+			when 'list'
+				#lorem_list(args)
+			else
+				if args.length == 1
+					if(args[0].to_s == 'text')
+						lorem_text()
+					else 
+						lorem_single_tag(args[0])
+					end
+				elsif args.length == 2
+					lorem_multiple_tags(args[0], args[1])
 				end
-			elsif args.length == 2
-				lorem_multiple_tags(args[0], args[1])
 			end
+	
 		else
 			puts "There are no params in the hook"
 		end
@@ -21,6 +32,36 @@ class Lorem
 	def lorem_text()
 		$content = get_content(nil)
 		puts "displaying lorem "
+	end
+	
+	def lorem_img(tag, width, height, bgColor = '')
+		src = 'http://placehold.it/' + width.to_s.strip + 'x' + height.to_s.strip;
+		unless bgColor.empty?
+			src += '/' + bgColor
+		end
+		$content = create_img_tag(tag, src)
+	end
+	
+	def lorem_list(args)
+		list = ''
+		i = 1;
+		puts "args 1 is " + args[1]
+		list_items = args[1].gsub(/\[([^\)]+)]/)
+		puts "list items is " + list_items
+		#list_items_count = args[1].gsub(/\w+/).length
+		#puts " list items is " + list_items_count
+		list_items.each { |tag|
+			puts "item is " + tag
+			list << "<" + tag + ">"
+			
+			if i == list_items.length
+				i = 0
+				while i < list_items.length
+					list << "</" + tag + ">"
+				end
+			end			
+			i += 1
+		}
 	end
 	
 	def lorem_single_tag(tag)
@@ -37,6 +78,9 @@ class Lorem
 		content = content.gsub(/^(\W*?[a-z])/).each { |m| m.upcase }
 		return "<" + tag + ">" + content + "</" + tag + ">"
 	end
+	def create_img_tag(tag, src)
+		return "<" + tag + " src='" + src + "' />"
+	end
 	
 	def get_content(wordcount)
 		unless wordcount.nil?
@@ -49,7 +93,7 @@ class Lorem
 		return create_tag(tag, lorem)
 	end
 	
-	def get_multiple_content(tag, wordcount, num)
+	def get_multiple_content(tag, wordcount, num = 0)
 		multiple_content = ""
 		if Integer(num) > 0
 			n = 1
