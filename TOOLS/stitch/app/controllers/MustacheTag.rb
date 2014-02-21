@@ -1,14 +1,16 @@
 class MustacheTag < Hooks
+	$stitch_permanent = false
 	
 	def parse_mustache_tag(content)
 		newcontent = content
 		parsedcontent = ""
 		loop do
-			matches = content.scan(/\{(?<mtemplate>(?<hookname>[^\(]+)\((?<args>[^\)]+)\))\}/)
+			matches = content.scan(/\{(?<mtemplate>(?<hookname>[^\(]+)\((?<args>[^\)]+)\)(?<bool>[^\(]*))\}/)
 			matches.each { |m| 
 				mtemplate = m[0]
 				hookname = m[1]
 				args = m[2]
+				bool = m[3]
 				
 				# Hook Handlers
 				hook_method = 'parse_hook_' + hookname
@@ -22,6 +24,8 @@ class MustacheTag < Hooks
 
 				# Do replace
 				newcontent["{" + mtemplate + "}"] = parsedcontent
+				
+				
 			}
 			
 			puts "Loop completed.", ""

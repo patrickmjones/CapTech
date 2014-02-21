@@ -9,8 +9,8 @@ class Include
 		end
 	end
 	def include_file(filepath)
-		file = $stitchdir + '/' + filepath + '.html'
-		puts "Including file: " + file	
-		$content = read_file(file)
+		$file = $stitchdir + '/' + filepath + '.html'
+		puts "Including file: " + $file	
+		$content = read_file($file)
 	end
 end
